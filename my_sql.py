@@ -30,3 +30,7 @@ def conectar(consulta_sql):
     # Respuesta si al conectar da error
     except mysql.connector.Error as err:
         print(f"Error al conectar a la base de datos: {err}")
+
+
+#mis datos
+#mysql -h bwdqevrj2jtcobnufxh3-mysql.services.clever-cloud.com -P 3306 -u utmxn2kyt9kerrpc -p bwdqevrj2jtcobnufxh3

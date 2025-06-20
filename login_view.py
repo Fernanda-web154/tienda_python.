@@ -44,10 +44,10 @@ def cargar_login(ventana, on_success_callback):  # Añadir parámetro para el ca
             consultar_usuario = conectar(f"SELECT * FROM usuarios WHERE correo = '{correo}' AND contrasenna = '{contrasenna}'")
             
             if len(consultar_usuario) != 0:   
-                print("Usuario activo", consultar_usuario[0][1])
+                print("¡Éxito!","Inicio de sesión éxitoso:", consultar_usuario[0][1])
                 on_success_callback(consultar_usuario[0])  # Llamar al callback
             else:
-                error_label.config(text="Datos incorrectos")
+                error_label.config(text="Error")
         except Exception as e:
             error_label.config(text=f"Error: {str(e)}")
     
