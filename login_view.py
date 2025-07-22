@@ -1,14 +1,14 @@
 import tkinter as tk
-from services.my_sql import conectar
+from services.my_sql import conectar # Importación corregida
 
-def cargar_login(ventana, on_success_callback):  # Añadir parámetro para el callback
+def cargar_login(ventana, on_success_callback):
     login_panel = tk.Frame(
         ventana,
         bg="purple",
         width=1000,
         height=600,
     )
-    login_panel.pack(fill="both", expand=True)  # Asegurar que se expanda
+    login_panel.pack(fill="both", expand=True)
     
     # Titulo
     titulo = tk.Label(login_panel, text="Login", font=("Arial", 16), bg="purple", fg="white")
@@ -41,13 +41,17 @@ def cargar_login(ventana, on_success_callback):  # Añadir parámetro para el ca
             return
             
         try:
-            consultar_usuario = conectar(f"SELECT * FROM usuarios WHERE correo = '{correo}' AND contrasenna = '{contrasenna}'")
+            # Consulta segura con parámetros
+            consultar_usuario = conectar(
+                "SELECT * FROM usuarios WHERE correo = %s AND contrasenna = %s",
+                (correo, contrasenna)
+            )
             
-            if len(consultar_usuario) != 0:   
-                print("¡Éxito!","Inicio de sesión éxitoso:", consultar_usuario[0][1])
-                on_success_callback(consultar_usuario[0])  # Llamar al callback
+            if consultar_usuario:
+                print("¡Éxito! Inicio de sesión exitoso:", consultar_usuario[0][1])
+                on_success_callback(consultar_usuario[0])
             else:
-                error_label.config(text="Error")
+                error_label.config(text="Credenciales incorrectas")
         except Exception as e:
             error_label.config(text=f"Error: {str(e)}")
     
