@@ -1,5 +1,5 @@
 import tkinter as tk
-from views.login_view import cargar_login
+from paneles.login_view import cargar_login
 from views.dashboard import ventana_usuario
 
 def on_login_success(usuario):
